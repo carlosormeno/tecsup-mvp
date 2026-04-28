@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tareas</title>
+</head>
+<body>
+
+<h1>Gestión de Tareas</h1>
+
+<form action="/tareas/agregar" method="post">
+    <input type="text" name="titulo" placeholder="Nueva tarea" required />
+    <button type="submit">Agregar</button>
+</form>
+
+<ul>
+    <li th:each="tarea : ${tareas}">
+        <span th:text="${tarea.id}"></span> -
+        <span th:text="${tarea.titulo}"></span> -
+        <span th:text="${tarea.completada} ? 'Completada' : 'Pendiente'"></span> -
+        <a th:href="@{/tareas/completar/{id}(id=${tarea.id})}" th:text="${tarea.completada} ? 'Deshacer' : 'Completar'"></a> -
+        <a th:href="@{/tareas/eliminar/{id}(id=${tarea.id})}">Eliminar</a>
+    </li>
+</ul>
+
+</body>
+</html>
